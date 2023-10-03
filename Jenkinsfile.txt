@@ -1,0 +1,56 @@
+pipeline{
+    agent any
+    tools {
+        maven 'M1'
+        
+    }
+    stages
+    {
+        stage("checkout")
+        {
+            steps{
+                git branch:'master',url: 'https://github.com/parvinder20043/Maven.git'
+            }
+        }
+       
+        stage("clean_01")
+        {
+            steps{
+                bat 'mvn clean'
+            }
+        }
+        
+        stage("compile_02")
+        {
+            steps{
+                bat 'mvn compile'
+            }
+        }
+        stage("test_03")
+        {
+            steps{
+                bat 'mvn test'
+            }
+        }
+        stage("package_04")
+        {
+            steps{
+                bat 'mvn package'
+            }
+        }
+        stage("intergration-test_05")
+        {
+            steps{
+                bat 'mvn integration-test'
+            }
+        }
+        stage("verify_06")
+        {
+            steps{
+                bat 'mvn verify'
+            }
+        }
+        
+    
+    }
+}
