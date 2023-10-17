@@ -1,8 +1,7 @@
 pipeline{
     agent any
     tools {
-        maven 'M1'
-        
+        maven 'M1'     
     }
     stages
     {
@@ -20,37 +19,47 @@ pipeline{
             }
         }
         
-        stage("compile_02")
+        stage("validate_02")
+        {
+            steps{
+                bat 'mvn validate'
+            }
+        }
+        stage("compile_03")
         {
             steps{
                 bat 'mvn compile'
             }
         }
-        stage("test_03")
+        stage("test_04")
         {
             steps{
                 bat 'mvn test'
             }
         }
-        stage("package_04")
+        stage("package_05")
         {
             steps{
                 bat 'mvn package'
             }
         }
-        stage("intergration-test_05")
+        stage("intergration-test_06")
         {
             steps{
                 bat 'mvn integration-test'
             }
         }
-        stage("verify_06")
+        stage("verify_07")
         {
             steps{
                 bat 'mvn verify'
             }
         }
-        
-    
+        stage("install_08")
+        {
+            steps{
+                bat 'mvn install'
+            }
+        }       
     }
 }
